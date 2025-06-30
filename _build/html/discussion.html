@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Methodology &#8212; Nonparametric Trend Test Statistic</title>
+    <title>5. Discussion and Interpretation &#8212; Nonparametric Trend Test Statistic</title>
   
   
   
@@ -57,12 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'methodology';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'discussion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="2. Implementation of nonparTrendR_test Function" href="function.html" />
+    <link rel="next" title="6. Conclusion" href="conclusion.html" />
+    <link rel="prev" title="4. Simulation Studies" href="simulation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,7 +175,11 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function.html">2. Implementation of <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code> Function</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methodology.html">3. Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">4. Simulation Studies</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Discussion and Interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">6. Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">7. References</a></li>
 </ul>
 
     </div>
@@ -248,7 +251,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmethodology.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdiscussion.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -278,7 +281,7 @@
       
       
       
-      <li><a href="_sources/methodology.md" target="_blank"
+      <li><a href="_sources/discussion.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -362,7 +365,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>3. Methodology</h1>
+    <h1>5. Discussion and Interpretation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,8 +375,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-samples">3.1 Independent Samples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependent-samples">3.2 Dependent Samples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-implications">Practical Implications</a></li>
 </ul>
             </nav>
         </div>
@@ -385,61 +389,35 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="methodology">
-<h1>3. Methodology<a class="headerlink" href="#methodology" title="Link to this heading">#</a></h1>
-<p>This section outlines the theoretical basis for the <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code> function. We follow Bathke (2009), who proposed a unified nonparametric trend test applicable to both independent and dependent (repeated measures) sample settings. The test statistic is based on rank-based methods and yields a standardized value denoted by <span class="math notranslate nohighlight">\(\hat{\nu}\)</span>, which is used to assess the presence of monotonic trends.</p>
-<section id="independent-samples">
-<h2>3.1 Independent Samples<a class="headerlink" href="#independent-samples" title="Link to this heading">#</a></h2>
-<p>For independent samples, we assume we have <span class="math notranslate nohighlight">\(a\)</span> ordered groups, each containing a numeric sample. The total number of observations is <span class="math notranslate nohighlight">\(N\)</span>. The core steps are:</p>
-<ol class="arabic">
-<li><p><strong>Ranking</strong>: All observations are combined and ranked.</p></li>
-<li><p><strong>Weight Vector</strong>: A contrast vector <span class="math notranslate nohighlight">\(w = (w_1, w_2, \dots, w_a)\)</span> is computed to encode the trend structure.<br />
-A common choice is:<br />
-$<span class="math notranslate nohighlight">\(
-w_i = \sum_{j &lt; i} n_j - \sum_{j &gt; i} n_j
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>n_j<span class="math notranslate nohighlight">\( is the size of group \)</span>j$.</p></li>
-<li><p><strong>Rank Sums</strong>: Let <span class="math notranslate nohighlight">\(R_i\)</span> be the sum of ranks for group <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
-<li><p><strong>Test Statistic</strong>:<br />
-$<span class="math notranslate nohighlight">\(
-\hat{\nu} =
-\frac{
-  \sum_{i=1}^{a} w_i R_i
-}{
-  \sqrt{
-    \sum_{i=1}^{a} \frac{n_i(n_i - 1)}{12} w_i^2 \sum_{k \in i} \left( r_k - \frac{N+1}{2} \right)^2
-  }
-}
-\)</span>$</p>
-<p>where <span class="math notranslate nohighlight">\(r_k\)</span> is the rank of the <span class="math notranslate nohighlight">\(k\)</span>-th observation in group <span class="math notranslate nohighlight">\(i\)</span>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="discussion-and-interpretation">
+<h1>5. Discussion and Interpretation<a class="headerlink" href="#discussion-and-interpretation" title="Link to this heading">#</a></h1>
+<p>The simulation results provide strong evidence for the effectiveness of nonparametric trend tests under both balanced and unbalanced designs.</p>
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>High Power Across Conditions</strong>: All three tests — ν̂ (Bathke’s unified test), T_HN (Hettmansperger-Norton), and T_JT (Jonckheere-Terpstra) — show consistently high power under both Normal and Binomial distributions.</p></li>
+<li><p><strong>Robustness to Unbalancing</strong>: The simulated power remains near 100% even with unbalanced sample sizes. This suggests the methods are well-suited for real-world scenarios where perfect group balance is uncommon.</p></li>
+<li><p><strong>Balanced vs. Unbalanced</strong>: While power increases with larger sample sizes in balanced designs, the advantage diminishes in unbalanced setups due to already high baseline performance.</p></li>
+<li><p><strong>Distribution Type</strong>: No significant drop in performance was noted between continuous (Normal) and discrete (Binomial) outcomes, reaffirming the nonparametric robustness of these methods.</p></li>
+<li><p><strong>Test Comparisons</strong>:</p>
+<ul>
+<li><p>ν̂ provides a unified and flexible structure, adaptable to both independent and dependent samples.</p></li>
+<li><p>T_HN is simple and powerful for detecting linear trends.</p></li>
+<li><p>T_JT remains a classical standard for ordered alternatives and shows excellent consistency.</p></li>
+</ul>
 </li>
-</ol>
-<p>This statistic approximates a standard normal distribution under the null hypothesis (no trend).</p>
+</ul>
 </section>
-<hr class="docutils" />
-<section id="dependent-samples">
-<h2>3.2 Dependent Samples<a class="headerlink" href="#dependent-samples" title="Link to this heading">#</a></h2>
-<p>For dependent (repeated measures) samples, we assume <span class="math notranslate nohighlight">\(n\)</span> units are observed under <span class="math notranslate nohighlight">\(a\)</span> ordered conditions (e.g., time points). The steps are:</p>
-<ol class="arabic simple">
-<li><p><strong>Ranking within Units</strong>: For each unit, rank the <span class="math notranslate nohighlight">\(a\)</span> repeated measurements.</p></li>
-<li><p><strong>Weight Vector</strong>: Same definition of <span class="math notranslate nohighlight">\(w\)</span> as in independent case:
-$<span class="math notranslate nohighlight">\(
-w_i = \sum_{j &lt; i} n_j - \sum_{j &gt; i} n_j
-\)</span>$</p></li>
-<li><p><strong>Average Ranks per Condition</strong>: Let <span class="math notranslate nohighlight">\(\bar{R}_i\)</span> be the average rank for condition <span class="math notranslate nohighlight">\(i\)</span> across all <span class="math notranslate nohighlight">\(n\)</span> units.</p></li>
-<li><p><strong>Test Statistic</strong>:<br />
-$<span class="math notranslate nohighlight">\(
-\hat{\nu} =
-\frac{
-  \sum_{i=1}^{a} w_i \bar{R}_i
-}{
-  \sqrt{
-    \frac{1}{n(a - 1)} \sum_{i=1}^{a} w_i^2
-  }
-}
-\)</span>$</p></li>
-</ol>
-<p>This statistic also approximates a standard normal distribution under the null hypothesis (no trend).</p>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The simulations assume idealized conditions (independent errors, known distribution types).</p></li>
+<li><p>Real-world applications may involve missing data, ties, or more complex correlation structures not addressed here.</p></li>
+</ul>
+</section>
+<section id="practical-implications">
+<h2>Practical Implications<a class="headerlink" href="#practical-implications" title="Link to this heading">#</a></h2>
+<p>Researchers working with ordinal, ranked, or non-normally distributed data can confidently use these nonparametric trend tests to assess ordered effects. Their flexibility and robustness make them strong alternatives to parametric ANOVA-based approaches, especially in small-sample or distributionally-challenged studies.</p>
 </section>
 </section>
 
@@ -474,13 +452,22 @@ $<span class="math notranslate nohighlight">\(
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="function.html"
+       href="simulation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">2. Implementation of <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code> Function</p>
+        <p class="prev-next-title">4. Simulation Studies</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="conclusion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6. Conclusion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -498,8 +485,9 @@ $<span class="math notranslate nohighlight">\(
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-samples">3.1 Independent Samples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependent-samples">3.2 Dependent Samples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-implications">Practical Implications</a></li>
 </ul>
   </nav></div>
 

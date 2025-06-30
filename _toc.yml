@@ -4,3 +4,10 @@ root: intro
 chapters:
   - file: function
   - file: methodology
+  - file: simulation
+  - file: discussion
+  - file: conclusion
+  - file: references
+
+
+
