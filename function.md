@@ -1,6 +1,28 @@
 # 2. Implementation of `nonparTrendR_test` Function
 
-This section presents the full implementation of the `nonparTrendR_test` function in R based on the methodology proposed by Bathke (2009). The function handles both independent and dependent sample designs and returns a standardized test statistic, $\hat{\nu}$, and the corresponding p-value.
+This section presents the complete implementation of the `nonparTrendR_test` function in R, which is based on the methodology proposed by **Bathke (2009)**. The function supports both **independent** and **dependent** sample structures and returns the standardized test statistic $\hat{\nu}$ along with the corresponding **p-value**.
+
+The function accepts:
+- A **list of numeric vectors** for independent samples (`type = "I"`)
+- A **numeric matrix** for dependent (repeated-measures) samples (`type = "D"`)
+
+It computes weighted rank sums and estimates the test statistic $\hat{\nu}$ using variance-adjusted normalization. The results help determine whether a **monotonic trend** (increasing or decreasing) is present across groups or time points.
+
+## 🔹 Example Results
+
+To demonstrate the function’s application and output:
+
+- For **independent samples**, such as in Example 1 of Bathke (2009), the function returns:  
+  **$\hat{\nu} = 3.5799$ and $p = 0.0002$**  
+  This strongly suggests a **significant increasing trend** across groups.
+
+- For **dependent samples**, as shown in a different setting from Bathke (2009), the function produces:  
+  **$\hat{\nu} = 3.63072$ and $p = 0.0001$**  
+  This indicates a **strong decreasing trend** over time in the repeated measures setup.
+
+These outputs validate the robustness of the `nonparTrendR_test`
+
+
 
 ```r
 
