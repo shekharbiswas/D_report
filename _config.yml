@@ -5,7 +5,6 @@ title: "Nonparametric Trend Test Statistic"
 author: "Daria S"
 logo: ""
 only_build_toc_files: true
-html_baseurl: https://shekharbiswas.github.io/D_report/
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
