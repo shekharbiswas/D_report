@@ -348,7 +348,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -364,6 +366,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-results">🔹 Example Results</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -375,7 +385,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="implementation-of-nonpartrendr-test-function">
 <h1>2. Implementation of <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code> Function<a class="headerlink" href="#implementation-of-nonpartrendr-test-function" title="Link to this heading">#</a></h1>
-<p>This section presents the full implementation of the <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code> function in R based on the methodology proposed by Bathke (2009). The function handles both independent and dependent sample designs and returns a standardized test statistic, <span class="math notranslate nohighlight">\(\hat{\nu}\)</span>, and the corresponding p-value.</p>
+<p>This section presents the complete implementation of the <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code> function in R, which is based on the methodology proposed by <strong>Bathke (2009)</strong>. The function supports both <strong>independent</strong> and <strong>dependent</strong> sample structures and returns the standardized test statistic <span class="math notranslate nohighlight">\(\hat{\nu}\)</span> along with the corresponding <strong>p-value</strong>.</p>
+<p>The function accepts:</p>
+<ul class="simple">
+<li><p>A <strong>list of numeric vectors</strong> for independent samples (<code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">&quot;I&quot;</span></code>)</p></li>
+<li><p>A <strong>numeric matrix</strong> for dependent (repeated-measures) samples (<code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=</span> <span class="pre">&quot;D&quot;</span></code>)</p></li>
+</ul>
+<p>It computes weighted rank sums and estimates the test statistic <span class="math notranslate nohighlight">\(\hat{\nu}\)</span> using variance-adjusted normalization. The results help determine whether a <strong>monotonic trend</strong> (increasing or decreasing) is present across groups or time points.</p>
+<section id="example-results">
+<h2>🔹 Example Results<a class="headerlink" href="#example-results" title="Link to this heading">#</a></h2>
+<p>To demonstrate the function’s application and output:</p>
+<ul class="simple">
+<li><p>For <strong>independent samples</strong>, such as in Example 1 of Bathke (2009), the function returns:<br />
+<strong><span class="math notranslate nohighlight">\(\hat{\nu} = 3.5799\)</span> and <span class="math notranslate nohighlight">\(p = 0.0002\)</span></strong><br />
+This strongly suggests a <strong>significant increasing trend</strong> across groups.</p></li>
+<li><p>For <strong>dependent samples</strong>, as shown in a different setting from Bathke (2009), the function produces:<br />
+<strong><span class="math notranslate nohighlight">\(\hat{\nu} = 3.63072\)</span> and <span class="math notranslate nohighlight">\(p = 0.0001\)</span></strong><br />
+This indicates a <strong>strong decreasing trend</strong> over time in the repeated measures setup.</p></li>
+</ul>
+<p>These outputs validate the robustness of the <code class="docutils literal notranslate"><span class="pre">nonparTrendR_test</span></code></p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#&#39; Nonparametric Trend Test (Bathke, 2009)</span>
 <span class="c1">#&#39;</span>
 <span class="c1">#&#39; Performs a nonparametric trend test for independent or dependent samples</span>
@@ -489,6 +517,7 @@ document.write(`
 </pre></div>
 </div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -535,6 +564,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-results">🔹 Example Results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
