@@ -1,17 +1,10 @@
 format: jb-book
-root: index
+root: intro
 
 chapters:
   - file: implementation
   - file: methodology
-    sections:
-      - file: independent
-      - file: dependent
   - file: simulation
-    sections:
-      - file: simulation_table
-      - file: balanced
-      - file: unbalanced
   - file: discussion
   - file: conclusion
   - file: references
