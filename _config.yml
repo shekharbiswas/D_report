@@ -6,6 +6,11 @@ author: "Daria S"
 logo: ""
 only_build_toc_files: true
 
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
